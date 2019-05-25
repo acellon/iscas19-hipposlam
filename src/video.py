@@ -165,8 +165,8 @@ plt.tight_layout()
 
 
 # %%
-arena_size = 1.5
-N=10000
+arena_size = 2
+N=20000
 path = vco.randwalk(0.1,N,2*arena_size)
 
 # %%
@@ -232,9 +232,9 @@ def animate(i, path):
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
 anim = animation.FuncAnimation(fig, animate, init_func=init, fargs=[path],
-                           frames=6000, interval=5)
+                           frames=20000, interval=5)
 
-#anim.save('canimation.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+#anim.save('bigGrid.mp4', fps=300, extra_args=['-vcodec', 'libx264'])
 
 # %%
 x = path[:,0]
