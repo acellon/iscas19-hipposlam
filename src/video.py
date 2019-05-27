@@ -26,7 +26,7 @@ from matplotlib import animation
 N = 12
 numrow = 6; numcol = 12;
 rho_num = 0.14
-rhos = rho_num*2 * (np.sqrt(3) ** np.arange(numrow))
+rhos = rho_num*1 * (np.sqrt(3) ** np.arange(numrow))
 thetas = np.pi + 2.0*np.pi*(np.arange(numcol))/numcol
 
 
@@ -168,9 +168,9 @@ plt.tight_layout()
 savestate = np.random.get_state()
 
 # %%
-arena_size = 2
+arena_size = 4
 N=20000
-path = vco.randwalk(0.1,N,2*arena_size)
+path = vco.randwalk(0.2,N,2*arena_size)
 
 # %%
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_lgrid, path))
@@ -179,8 +179,8 @@ path = vco.randwalk(0.1,N,2*arena_size)
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_sgrid, path))
 #plt.title('Small Grid: Random Walk');
 
-#vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_border, path))
-#plt.title('Border: Random Walk');
+vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_border, path))
+plt.title('Border: Random Walk');
 
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_cborder, path))
 #plt.title('Curved border: Random Walk');
@@ -188,8 +188,8 @@ path = vco.randwalk(0.1,N,2*arena_size)
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_lborder, path))
 #plt.title('Lumpy border: Random Walk');
 
-vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_place, path))
-plt.title('Place: Random Walk');
+#vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_place, path))
+#plt.title('Place: Random Walk');
 
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_dplace, path))
 #plt.title('Place: Random Walk');
@@ -199,7 +199,7 @@ plt.title('Place: Random Walk');
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.collections import LineCollection
 
-envelope = abs(vco.matrix_sum_rw(VCOmatrix, weights_place, path))
+envelope = abs(vco.matrix_sum_rw(VCOmatrix, weights_border, path))
 max_env = np.max(envelope)
 env_thresh = envelope - 0.65*max_env
 env_thresh[env_thresh<0] = 0
@@ -234,7 +234,7 @@ def animate(i, path):
 anim = animation.FuncAnimation(fig, animate, init_func=init, fargs=[path],
                            frames=20000, interval=5)
 
-anim.save('bigPlace.mp4', fps=300, extra_args=['-vcodec', 'libx264'])
+anim.save('border.mp4', fps=300, extra_args=['-vcodec', 'libx264'])
 
 # %%
 x = path[:,0]
