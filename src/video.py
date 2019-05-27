@@ -165,12 +165,12 @@ plt.tight_layout()
 
 
 # %%
+savestate = np.random.get_state()
+
+# %%
 arena_size = 2
 N=20000
 path = vco.randwalk(0.1,N,2*arena_size)
-
-# %%
-path
 
 # %%
 #vco.plot_randwalk(path, vco.matrix_sum_rw(VCOmatrix, weights_lgrid, path))
@@ -199,7 +199,7 @@ plt.title('Place: Random Walk');
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.collections import LineCollection
 
-envelope = abs(vco.matrix_sum_rw(VCOmatrix, weights_sgrid, path))
+envelope = abs(vco.matrix_sum_rw(VCOmatrix, weights_place, path))
 max_env = np.max(envelope)
 env_thresh = envelope - 0.65*max_env
 env_thresh[env_thresh<0] = 0
